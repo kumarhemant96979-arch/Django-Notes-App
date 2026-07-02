@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <title>Recycle Bin</title>
+</head>
+
+<body class="bg-light">
+
+<!-- Navbar -->
+
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary shadow">
+
+    <div class="container">
+
+        <a class="navbar-brand fw-bold"
+           href="{% url 'home_create_notes' %}">
+            📝 My Notes
+        </a>
+
+        <ul class="navbar-nav ms-auto">
+
+            <li class="nav-item me-3">
+
+                <a class="nav-link"
+                   href="{% url 'home_create_notes' %}">
+                    🏠 Notes
+                </a>
+
+            </li>
+
+            <li class="nav-item">
+
+                <a class="btn btn-danger"
+                   href="{% url 'logout' %}">
+                    Logout
+                </a>
+
+            </li>
+
+        </ul>
+
+    </div>
+
+</nav>
+
+
+<div class="container mt-5">
+
+    <div class="card shadow-lg border-0">
+
+        <div class="card-header bg-danger text-white">
+
+            <h3 class="mb-0">
+                🗑 Recycle Bin
+            </h3>
+
+        </div>
+
+        <div class="card-body">
+
+            <div class="table-responsive">
+
+                <table class="table table-hover table-bordered align-middle">
+
+                    <thead class="table-danger">
+
+                        <tr>
+
+                            <th>S.No</th>
+
+                            <th>Title</th>
+
+                            <th>Description</th>
+
+                            <th>Restore</th>
+
+                            <th>Delete Forever</th>
+
+                        </tr>
+
+                    </thead>
+
+                    <tbody>
+
+                        {% for deleted_note in deleted_notes %}
+
+                        <tr>
+
+                            <td>{{ forloop.counter }}</td>
+
+                            <td>{{ deleted_note.title }}</td>
+
+                            <td>{{ deleted_note.description }}</td>
+
+                            <td>
+
+                                <a href="{% url 'restore_note' deleted_note.id %}"
+                                   class="btn btn-success btn-sm">
+
+                                    Restore
+
+                                </a>
+
+                            </td>
+
+                            <td>
+
+                                <a href="{% url 'permanent_delete' deleted_note.id %}"
+                                   class="btn btn-danger btn-sm">
+
+                                    Delete Forever
+
+                                </a>
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+
+                            <td colspan="5"
+                                class="text-center text-muted">
+
+                                🗑 Recycle Bin is Empty
+
+                            </td>
+
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+
+</html>
