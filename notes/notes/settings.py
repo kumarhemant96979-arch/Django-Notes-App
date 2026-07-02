@@ -25,7 +25,7 @@ SECRET_KEY = 'django-insecure-3w4y8zv5u$z652fg32mkj0u_=6m11c^ktl$^nl#li0-q-u&a(-
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 
 # Application definition
@@ -49,6 +49,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'whitenoise.middleware.WhiteNoise.Middleware',
 ]
 
 ROOT_URLCONF = 'notes.urls'
@@ -121,3 +122,5 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/6.0/howto/static-files/
 
 STATIC_URL= 'static/'
+
+STATIC_ROOT = BASE_DIR / "staticfiles"
